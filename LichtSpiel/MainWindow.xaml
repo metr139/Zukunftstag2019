@@ -1,0 +1,73 @@
+﻿<Window x:Class="LichtSpiel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LichtSpiel"
+        mc:Ignorable="d"
+        Title="Das tolle Metrom Lichtspiel" Height="450" Width="800">
+
+    <Window.Resources>
+        <Storyboard x:Key="KnopfAnimation" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation From="1" To="0.2" Duration="0:0:1.500"></DoubleAnimation>
+            <DoubleAnimation From="0.2" To="1" Duration="0:0:0.500" AccelerationRatio="0.5"></DoubleAnimation>
+        </Storyboard>
+
+        <Style x:Key="LichtButton" TargetType="Button">
+            <Style.Setters>
+                <Setter Property="Height" Value="60" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid x:Name="grid">
+                                <Border x:Name="border" CornerRadius="15" BorderThickness="1" Padding="2" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                        
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="240"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="40 "></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" IsHitTestVisible="False" Margin="20 10 0 0">
+                <Button Style="{StaticResource LichtButton}" x:Name="KnopfRot" Background="DarkRed" />
+                <Button Style="{StaticResource LichtButton}" x:Name="KnopfBlau" Background="SteelBlue" />
+                <Button Style="{StaticResource LichtButton}" x:Name="KnopfGruen" Background="Green" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Margin="0 10 20 0">
+                <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfRot" Background="DarkRed" Click="BenutzerKnopfRot_Geklickt" />
+                <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfBlau" Background="SteelBlue" Click="BenutzerKnopfBlau_Geklickt" />
+                <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfGruen" Background="Green" Click="BenutzerKnopfGruen_Geklickt" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Button x:Name="KnopfStart" Click="Start_Knopf_Geklickt" Margin="40 10 40 20">Start</Button>
+        </Grid>
+    </Grid>
+</Window>
