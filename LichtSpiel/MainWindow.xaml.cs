@@ -91,7 +91,7 @@ namespace LichtSpiel
                     }
                 case Farbe.Blau:
                     {
-                        aktuellerKnopf = KnopfBlau;
+                        aktuellerKnopf = KnopfRot;
                         break;
                     }
                 case Farbe.Gruen:
