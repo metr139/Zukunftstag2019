@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Media;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,7 +11,7 @@ namespace LichtSpiel
 {
     public partial class MainWindow : Window
     {
-        private Liste<Farbe> _generierteListe;
+        private Liste<Farbe> computerliste;
         private Liste<Farbe> _benutzerListe;
 
         public MainWindow()
@@ -22,9 +23,11 @@ namespace LichtSpiel
 
         private void LichtSpielAufstarten()
         {
+            //Knöpfe apschaltten
             BenutzerKnopfRot.IsEnabled = false;
             BenutzerKnopfBlau.IsEnabled = false;
             BenutzerKnopfGruen.IsEnabled = false;
+            BenutzerKnopfGold.IsEnabled = false;
 
             KnopfRot.Background = Brushes.DarkRed;
             BenutzerKnopfRot.Background = Brushes.DarkRed;
@@ -38,14 +41,19 @@ namespace LichtSpiel
 
         private async void Start_Knopf_Geklickt(object sender, RoutedEventArgs e)
         {
+            Timer.Text = "00:00:00";
+            var watch = new Stopwatch();
+            watch.Start();
+
             KnoepfeAbschalten();
             await Task.Delay(400);
 
-            _generierteListe = ZufaelligeFarbliste();
+            computerliste = ZufaelligeFarbliste();
             _benutzerListe = new Liste<Farbe>();
 
-            await FarbenAbspielen(_generierteListe);
+            await FarbenAbspielen(computerliste);
             KnoepfeEinschalten();
+            Timer.Text = watch.Elapsed.ToString();
         }
 
         private void KnoepfeEinschalten()
@@ -54,6 +62,7 @@ namespace LichtSpiel
             BenutzerKnopfRot.IsEnabled = true;
             BenutzerKnopfBlau.IsEnabled = true;
             BenutzerKnopfGruen.IsEnabled = true;
+            BenutzerKnopfGold.IsEnabled = true;
         }
 
         private void KnoepfeAbschalten()
@@ -67,6 +76,7 @@ namespace LichtSpiel
             BenutzerKnopfRot.IsEnabled = false;
             BenutzerKnopfBlau.IsEnabled = false;
             BenutzerKnopfGruen.IsEnabled = false;
+            BenutzerKnopfGold.IsEnabled = false;
         }
 
         private async Task FarbenAbspielen(Liste<Farbe> farbliste)
@@ -91,12 +101,17 @@ namespace LichtSpiel
                     }
                 case Farbe.Blau:
                     {
-                        aktuellerKnopf = KnopfRot;
+                        aktuellerKnopf = KnopfBlau;
                         break;
                     }
                 case Farbe.Gruen:
                     {
                         aktuellerKnopf = KnopfGruen;
+                        break;
+                    }
+                        case Farbe.Gold:
+                    {
+                        aktuellerKnopf = KnopfGold;
                         break;
                     }
             }
@@ -123,11 +138,15 @@ namespace LichtSpiel
             var neueFarbenListe = new Liste<Farbe>();
             var zufallsGenerator = new FarbenZufallsGenerator();
 
-            for(int i=0; i < 3; i++)
+            for(int i=0; i < 2; i++)
             {
                 Farbe farbe = zufallsGenerator.GibFarbe();
 
                 neueFarbenListe.Hinzufuegen(farbe);
+                neueFarbenListe.Hinzufuegen(Farbe.Rot);
+                neueFarbenListe.Hinzufuegen(Farbe.Gold);
+                neueFarbenListe.Hinzufuegen(Farbe.Blau);
+                neueFarbenListe.Hinzufuegen(Farbe.Gruen);
             }
 
             return neueFarbenListe;
@@ -150,14 +169,19 @@ namespace LichtSpiel
             _benutzerListe.Hinzufuegen(Farbe.Gruen);
             BenutzerEingabeUeberpruefen();
         }
+        private void BenutzerKnopfGold_Geklickt(object sender, RoutedEventArgs e)
+        {
+            _benutzerListe.Hinzufuegen(Farbe.Gold);
+            BenutzerEingabeUeberpruefen();
+        }
 
         private void BenutzerEingabeUeberpruefen()
         {
-            if(_benutzerListe.Laenge == _generierteListe.Laenge)
+            if(_benutzerListe.Laenge == computerliste.Laenge)
             {
                 for(int i=0; i < _benutzerListe.Laenge; i++)
                 {
-                    if(_benutzerListe[i] != _generierteListe[i])
+                    if(_benutzerListe[i] != computerliste[i])
                     {
                         UngueltigeEingabe();
                         BenutzerKnoepfeAbschalten();
@@ -189,6 +213,11 @@ namespace LichtSpiel
             SoundPlayer player = new SoundPlayer(stream);
             player.Load();
             player.Play();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
