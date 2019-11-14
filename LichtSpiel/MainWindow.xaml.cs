@@ -25,6 +25,7 @@ namespace LichtSpiel
             BenutzerKnopfRot.IsEnabled = false;
             BenutzerKnopfBlau.IsEnabled = false;
             BenutzerKnopfGruen.IsEnabled = false;
+            BenutzerKnopfOrange.IsEnabled = false;
 
             KnopfRot.Background = Brushes.DarkRed;
             BenutzerKnopfRot.Background = Brushes.DarkRed;
@@ -54,8 +55,9 @@ namespace LichtSpiel
             BenutzerKnopfRot.IsEnabled = true;
             BenutzerKnopfBlau.IsEnabled = true;
             BenutzerKnopfGruen.IsEnabled = true;
-        }
 
+            BenutzerKnopfOrange.IsEnabled = true;
+        }
         private void KnoepfeAbschalten()
         {
             KnopfStart.IsEnabled = false;
@@ -67,6 +69,7 @@ namespace LichtSpiel
             BenutzerKnopfRot.IsEnabled = false;
             BenutzerKnopfBlau.IsEnabled = false;
             BenutzerKnopfGruen.IsEnabled = false;
+            BenutzerKnopfOrange.IsEnabled = false;
         }
 
         private async Task FarbenAbspielen(Liste<Farbe> farbliste)
@@ -91,12 +94,17 @@ namespace LichtSpiel
                     }
                 case Farbe.Blau:
                     {
-                        aktuellerKnopf = KnopfRot;
+                        aktuellerKnopf = KnopfBlau;
                         break;
                     }
                 case Farbe.Gruen:
                     {
                         aktuellerKnopf = KnopfGruen;
+                        break;
+                    }
+                case Farbe.Orange:
+                    {
+                        aktuellerKnopf = KnopfOrange;
                         break;
                     }
             }
@@ -123,7 +131,7 @@ namespace LichtSpiel
             var neueFarbenListe = new Liste<Farbe>();
             var zufallsGenerator = new FarbenZufallsGenerator();
 
-            for(int i=0; i < 3; i++)
+            for(int i=0; i < 5; i++)
             {
                 Farbe farbe = zufallsGenerator.GibFarbe();
 
@@ -148,6 +156,11 @@ namespace LichtSpiel
         private void BenutzerKnopfGruen_Geklickt(object sender, RoutedEventArgs e)
         {
             _benutzerListe.Hinzufuegen(Farbe.Gruen);
+            BenutzerEingabeUeberpruefen();
+        }
+        private void BenutzerKnopfOrange_Geklickt(object sender, RoutedEventArgs e)
+        {
+            _benutzerListe.Hinzufuegen(Farbe.Orange);
             BenutzerEingabeUeberpruefen();
         }
 

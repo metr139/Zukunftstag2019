@@ -15,7 +15,7 @@ namespace LichtSpiel
 
         public Farbe GibFarbe()
         {
-            int zahl = _random.Next(1, 4);
+            int zahl = _random.Next(1, 5);
             Farbe farbe = (Farbe)zahl;
 
             return farbe;

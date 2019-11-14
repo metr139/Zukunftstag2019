@@ -21,7 +21,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
                             <Grid x:Name="grid">
-                                <Border x:Name="border" CornerRadius="15" BorderThickness="1" Padding="2" Background="{TemplateBinding Background}">
+                                <Border x:Name="border" CornerRadius="1000" BorderThickness="1" Padding="2" Background="{TemplateBinding Background}">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
                             </Grid>
@@ -43,31 +43,33 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="240"></RowDefinition>
+            <RowDefinition Height="290"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="90"></ColumnDefinition>
                 <ColumnDefinition Width="40 "></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="90"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" IsHitTestVisible="False" Margin="20 10 0 0">
                 <Button Style="{StaticResource LichtButton}" x:Name="KnopfRot" Background="DarkRed" />
                 <Button Style="{StaticResource LichtButton}" x:Name="KnopfBlau" Background="SteelBlue" />
                 <Button Style="{StaticResource LichtButton}" x:Name="KnopfGruen" Background="Green" />
+                <Button Style="{StaticResource LichtButton}" x:Name="KnopfOrange" Background="Orange" />
             </StackPanel>
 
             <StackPanel Grid.Column="2" Margin="0 10 20 0">
                 <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfRot" Background="DarkRed" Click="BenutzerKnopfRot_Geklickt" />
                 <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfBlau" Background="SteelBlue" Click="BenutzerKnopfBlau_Geklickt" />
                 <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfGruen" Background="Green" Click="BenutzerKnopfGruen_Geklickt" />
+                <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfOrange" Background="Orange" Click="BenutzerKnopfOrange_Geklickt" />
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
-            <Button x:Name="KnopfStart" Click="Start_Knopf_Geklickt" Margin="40 10 40 20">Start</Button>
+            <Button x:Name="KnopfStart" Click="Start_Knopf_Geklickt" Margin="40 10 40 20" Background="Violet" FontSize="32">Los geht's</Button>
         </Grid>
     </Grid>
 </Window>
