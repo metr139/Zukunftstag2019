@@ -54,6 +54,7 @@ namespace LichtSpiel
             BenutzerKnopfRot.IsEnabled = true;
             BenutzerKnopfBlau.IsEnabled = true;
             BenutzerKnopfGruen.IsEnabled = true;
+            BenutzerKnopfyellow.IsEnabled = true;
         }
 
         private void KnoepfeAbschalten()
@@ -67,6 +68,7 @@ namespace LichtSpiel
             BenutzerKnopfRot.IsEnabled = false;
             BenutzerKnopfBlau.IsEnabled = false;
             BenutzerKnopfGruen.IsEnabled = false;
+            BenutzerKnopfyellow.IsEnabled = false;
         }
 
         private async Task FarbenAbspielen(Liste<Farbe> farbliste)
@@ -91,12 +93,17 @@ namespace LichtSpiel
                     }
                 case Farbe.Blau:
                     {
-                        aktuellerKnopf = KnopfRot;
+                        aktuellerKnopf = KnopfBlau;
                         break;
                     }
                 case Farbe.Gruen:
                     {
                         aktuellerKnopf = KnopfGruen;
+                        break;
+                    }
+                case Farbe.Yellow:
+                    {
+                        aktuellerKnopf = Knopfyellow;
                         break;
                     }
             }
@@ -123,7 +130,7 @@ namespace LichtSpiel
             var neueFarbenListe = new Liste<Farbe>();
             var zufallsGenerator = new FarbenZufallsGenerator();
 
-            for(int i=0; i < 3; i++)
+            for(int i=0; i < 4; i++)
             {
                 Farbe farbe = zufallsGenerator.GibFarbe();
 
@@ -150,6 +157,12 @@ namespace LichtSpiel
             _benutzerListe.Hinzufuegen(Farbe.Gruen);
             BenutzerEingabeUeberpruefen();
         }
+        private void BenutzerKnopfYellow_Geklickt(object sender, RoutedEventArgs e)
+        {
+            _benutzerListe.Hinzufuegen(Farbe.Yellow);
+            BenutzerEingabeUeberpruefen();
+        }
+
 
         private void BenutzerEingabeUeberpruefen()
         {

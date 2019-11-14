@@ -43,7 +43,7 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="240"></RowDefinition>
+            <RowDefinition Height="290"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         
@@ -57,12 +57,14 @@
                 <Button Style="{StaticResource LichtButton}" x:Name="KnopfRot" Background="DarkRed" />
                 <Button Style="{StaticResource LichtButton}" x:Name="KnopfBlau" Background="SteelBlue" />
                 <Button Style="{StaticResource LichtButton}" x:Name="KnopfGruen" Background="Green" />
+                <Button Style="{StaticResource LichtButton}" x:Name="Knopfyellow" Background="Yellow" />
             </StackPanel>
 
             <StackPanel Grid.Column="2" Margin="0 10 20 0">
                 <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfRot" Background="DarkRed" Click="BenutzerKnopfRot_Geklickt" />
                 <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfBlau" Background="SteelBlue" Click="BenutzerKnopfBlau_Geklickt" />
                 <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfGruen" Background="Green" Click="BenutzerKnopfGruen_Geklickt" />
+                <Button Style="{StaticResource LichtButton}" x:Name="BenutzerKnopfyellow" Background="Yellow" Click="BenutzerKnopfYellow_Geklickt" />
             </StackPanel>
         </Grid>
 
